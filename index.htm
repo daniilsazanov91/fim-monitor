@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<title>Анализ систем контроля целостности файлов (FIM)</title>
+
+<style>
+body{
+    margin:0;
+    font-family: Arial, Helvetica, sans-serif;
+    background:#0d1117;
+    color:#e6edf3;
+    line-height:1.6;
+}
+header{
+    background:#161b22;
+    padding:30px;
+    text-align:center;
+    border-bottom:1px solid #30363d;
+}
+h1{margin:0;font-size:32px;}
+section{
+    padding:40px;
+    max-width:1000px;
+    margin:auto;
+}
+.card{
+    background:#161b22;
+    padding:25px;
+    margin:20px 0;
+    border-radius:8px;
+    border:1px solid #30363d;
+}
+h2{color:#58a6ff;}
+code{
+    background:#21262d;
+    padding:5px 8px;
+    border-radius:4px;
+}
+footer{
+    text-align:center;
+    padding:20px;
+    border-top:1px solid #30363d;
+    margin-top:40px;
+    color:#8b949e;
+}
+.button{
+    display:inline-block;
+    padding:10px 20px;
+    margin-top:15px;
+    background:#238636;
+    color:white;
+    text-decoration:none;
+    border-radius:6px;
+}
+</style>
+</head>
+
+<body>
+
+<header>
+    <h1>File Integrity Monitoring (FIM)</h1>
+    <p>Анализ систем контроля целостности файлов в информационной безопасности</p>
+</header>
+
+<section>
+
+<div class="card">
+<h2>Что такое FIM</h2>
+<p>
+FIM (File Integrity Monitoring) — это технология контроля изменений файлов в системе.
+Она позволяет обнаруживать несанкционированные изменения, удаление или добавление файлов.
+</p>
+</div>
+
+<div class="card">
+<h2>Где применяется FIM</h2>
+<ul>
+<li>SOC и DFIR-расследования</li>
+<li>Стандарты PCI DSS, ISO 27001, ГОСТ</li>
+<li>Защита серверов Windows/Linux</li>
+<li>Контроль системных и конфигурационных файлов</li>
+<li>Обнаружение вредоносной активности</li>
+</ul>
+</div>
+
+<div class="card">
+<h2>Принцип работы</h2>
+<p>
+Система создаёт эталон (baseline) хэшей файлов с использованием алгоритма SHA-256.
+При повторной проверке вычисляются новые хэши и сравниваются с эталоном.
+</p>
+
+<pre>
+Файл → SHA256 → Baseline
+Файл изменён → Новый SHA256 ≠ Baseline → Инцидент
+</pre>
+</div>
+
+<div class="card">
+<h2>Какие события обнаруживает FIM</h2>
+<ul>
+<li>Изменение файла (modified)</li>
+<li>Удаление файла (removed)</li>
+<li>Добавление нового файла (added)</li>
+</ul>
+</div>
+
+<div class="card">
+<h2>Примеры реальных систем FIM</h2>
+<ul>
+<li>Wazuh / OSSEC</li>
+<li>Tripwire</li>
+<li>AIDE (Linux)</li>
+<li>Windows File Integrity Monitoring</li>
+</ul>
+</div>
+
+<div class="card">
+<h2>Демонстрация работы FIM (локально)</h2>
+<p>
+Для демонстрации был реализован собственный FIM-агент на Python,
+который вычисляет SHA256 файлов и формирует отчёт об изменениях.
+</p>
+
+<pre>
+python app.py
+http://127.0.0.1:5000
+</pre>
+
+<p>
+При изменении файлов система показывает:
+</p>
+
+<pre>
+{
+  "added": [],
+  "removed": [],
+  "modified": ["monitor_folder/test.txt"]
+}
+</pre>
+</div>
+
+<div class="card">
+<h2>Вывод</h2>
+<p>
+FIM является важным инструментом обеспечения информационной безопасности,
+позволяющим своевременно выявлять компрометацию системы и изменения критически важных файлов.
+</p>
+</div>
+
+</section>
+
+<footer>
+Проект по анализу систем контроля целостности файлов (FIM) • GitHub Pages
+</footer>
+
+</body>
+</html>
